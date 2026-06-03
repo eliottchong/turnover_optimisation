@@ -28,7 +28,7 @@ def main():
     print("=" * 70)
 
     # Step 1: Fit distributions
-    print("\n📊 Step 1: Fitting distributions from historical data...")
+    print("\n Step 1: Fitting distributions from historical data...")
     print("-" * 70)
 
     priors = fit_distributions(
@@ -39,7 +39,7 @@ def main():
     print(f"✓ Modeled dwell times for {len(priors.dwell_time)} party size bands")
 
     # Step 2: Get recommendation
-    print("\n\n🎯 Step 2: Getting table recommendation...")
+    print("\n\n Step 2: Getting table recommendation...")
     print("-" * 70)
 
     # Load floor state
@@ -81,7 +81,7 @@ def main():
     results = compare_policies(tables, priors, config, service_start, num_runs=5)
 
     print("\n" + "=" * 70)
-    print("✨ Demo Complete!")
+    print(" Demo Complete!")
     print("=" * 70)
     print("\nNext steps:")
     print("  • Try with your own data: tableopt fit --csv your_data.csv")
