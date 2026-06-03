@@ -1,0 +1,52 @@
+tables:
+  - id: T1
+    capacity: 2
+    section: main
+  - id: T2
+    capacity: 2
+    section: main
+  - id: T3
+    capacity: 2
+    section: bar
+  - id: T5
+    capacity: 4
+    section: main
+  - id: T6
+    capacity: 4
+    section: main
+  - id: T8
+    capacity: 4
+    section: main
+  - id: T9
+    capacity: 4
+    section: main
+  - id: T10
+    capacity: 4
+    section: patio
+  - id: T11
+    capacity: 6
+    section: main
+    combinable_with: [T12]
+  - id: T12
+    capacity: 6
+    section: main
+    combinable_with: [T11]
+
+service:
+  lunch_start: "11:30"
+  lunch_end: "14:30"
+  dinner_start: "17:00"
+  dinner_end: "22:30"
+
+scoring:
+  horizon_minutes: 90
+  opportunity_cost_weight: 1.0
+  fit_penalty_weight: 0.8
+  reservation_hard_block: true
+  combine_penalty_weight: 0.3
+
+turnover_targets:
+  party_size_2: 75
+  party_size_3_4: 95
+  party_size_5_6: 115
+  party_size_7_plus: 130

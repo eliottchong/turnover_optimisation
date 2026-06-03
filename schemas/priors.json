@@ -1,0 +1,110 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PriorDistributions",
+  "description": "Learned distributions from historical data for table allocation",
+  "type": "object",
+  "required": ["generated_at", "data_range", "walk_in_pmf", "dwell_time"],
+  "properties": {
+    "generated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When these priors were generated"
+    },
+    "data_range": {
+      "type": "object",
+      "required": ["start_date", "end_date"],
+      "properties": {
+        "start_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "end_date": {
+          "type": "string",
+          "format": "date"
+        }
+      }
+    },
+    "walk_in_pmf": {
+      "type": "object",
+      "description": "Probability mass function for walk-in party sizes by time slot",
+      "patternProperties": {
+        "^[0-6]_[0-9]{1,2}$": {
+          "type": "object",
+          "description": "Day_of_week (0=Mon) and hour",
+          "patternProperties": {
+            "^[0-9]+$": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "description": "Probability for party size (key)"
+            }
+          }
+        }
+      }
+    },
+    "walk_in_rate": {
+      "type": "object",
+      "description": "Average walk-ins per hour by time slot",
+      "patternProperties": {
+        "^[0-6]_[0-9]{1,2}$": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
+    "dwell_time": {
+      "type": "object",
+      "description": "Dwell time distributions by party size",
+      "patternProperties": {
+        "^[0-9]+-[0-9]+$": {
+          "type": "object",
+          "required": ["distribution", "params"],
+          "properties": {
+            "distribution": {
+              "type": "string",
+              "enum": ["lognormal", "gamma", "normal"],
+              "description": "Distribution type"
+            },
+            "params": {
+              "type": "object",
+              "description": "Distribution parameters"
+            },
+            "mean": {
+              "type": "number",
+              "description": "Mean dwell time in minutes"
+            },
+            "std": {
+              "type": "number",
+              "description": "Standard deviation in minutes"
+            },
+            "sample_size": {
+              "type": "integer",
+              "description": "Number of observations"
+            }
+          }
+        }
+      }
+    },
+    "no_show_rate": {
+      "type": "object",
+      "description": "No-show rates by party size and advance booking",
+      "properties": {
+        "overall": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "by_party_size": {
+          "type": "object",
+          "patternProperties": {
+            "^[0-9]+$": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            }
+          }
+        }
+      }
+    }
+  }
+}

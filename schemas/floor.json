@@ -1,0 +1,164 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "FloorState",
+  "description": "Current state of restaurant floor for table allocation",
+  "type": "object",
+  "required": ["tables", "parties_to_seat", "timestamp"],
+  "properties": {
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When this state snapshot was taken"
+    },
+    "tables": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Table"
+      }
+    },
+    "parties_to_seat": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Party"
+      }
+    },
+    "upcoming_reservations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Reservation"
+      }
+    }
+  },
+  "definitions": {
+    "Table": {
+      "type": "object",
+      "required": ["id", "capacity", "status"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique table identifier"
+        },
+        "capacity": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Number of seats"
+        },
+        "min_capacity": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Minimum party size (optional, defaults to 1)"
+        },
+        "max_capacity": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Maximum party size (optional, defaults to capacity)"
+        },
+        "combinable_with": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "IDs of tables this can be combined with"
+        },
+        "section": {
+          "type": "string",
+          "description": "Section or zone identifier"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["free", "occupied", "reserved_hold", "dirty", "unavailable"],
+          "description": "Current table status"
+        },
+        "current_party_size": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Size of party currently seated (if occupied)"
+        },
+        "expected_free_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Estimated time table will be free (if occupied)"
+        }
+      }
+    },
+    "Party": {
+      "type": "object",
+      "required": ["id", "size", "type"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique party identifier"
+        },
+        "size": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Number of people in party"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["walk_in", "reservation"],
+          "description": "How the party arrived"
+        },
+        "arrival_time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When party arrived/will arrive"
+        },
+        "quoted_wait": {
+          "type": "integer",
+          "description": "Minutes quoted for wait (walk-ins)"
+        },
+        "priority": {
+          "type": "integer",
+          "minimum": 0,
+          "default": 0,
+          "description": "Priority score (higher = seat first)"
+        },
+        "duration_estimate": {
+          "type": "integer",
+          "description": "Expected meal duration in minutes"
+        },
+        "table_preference": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Preferred table IDs"
+        }
+      }
+    },
+    "Reservation": {
+      "type": "object",
+      "required": ["id", "party_size", "time", "status"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique reservation identifier"
+        },
+        "party_size": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Number of guests"
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Reservation time"
+        },
+        "duration": {
+          "type": "integer",
+          "description": "Expected duration in minutes"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["booked", "confirmed", "seated", "no_show", "cancelled"],
+          "description": "Current reservation status"
+        },
+        "table_lock": {
+          "type": "string",
+          "description": "Specific table requested (optional)"
+        }
+      }
+    }
+  }
+}

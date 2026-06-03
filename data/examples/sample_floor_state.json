@@ -1,0 +1,108 @@
+{
+  "timestamp": "2024-03-15T18:45:00Z",
+  "tables": [
+    {
+      "id": "T1",
+      "capacity": 2,
+      "status": "occupied",
+      "current_party_size": 2,
+      "expected_free_at": "2024-03-15T19:30:00Z"
+    },
+    {
+      "id": "T2",
+      "capacity": 2,
+      "status": "free"
+    },
+    {
+      "id": "T3",
+      "capacity": 2,
+      "status": "free"
+    },
+    {
+      "id": "T5",
+      "capacity": 4,
+      "status": "occupied",
+      "current_party_size": 3,
+      "expected_free_at": "2024-03-15T19:35:00Z"
+    },
+    {
+      "id": "T6",
+      "capacity": 4,
+      "status": "free"
+    },
+    {
+      "id": "T8",
+      "capacity": 4,
+      "status": "occupied",
+      "current_party_size": 4,
+      "expected_free_at": "2024-03-15T19:45:00Z"
+    },
+    {
+      "id": "T9",
+      "capacity": 4,
+      "status": "free"
+    },
+    {
+      "id": "T10",
+      "capacity": 4,
+      "status": "free"
+    },
+    {
+      "id": "T11",
+      "capacity": 6,
+      "status": "occupied",
+      "current_party_size": 5,
+      "expected_free_at": "2024-03-15T20:40:00Z",
+      "combinable_with": ["T12"]
+    },
+    {
+      "id": "T12",
+      "capacity": 6,
+      "status": "occupied",
+      "current_party_size": 6,
+      "expected_free_at": "2024-03-15T20:25:00Z",
+      "combinable_with": ["T11"]
+    }
+  ],
+  "parties_to_seat": [
+    {
+      "id": "P1",
+      "size": 4,
+      "type": "walk_in",
+      "arrival_time": "2024-03-15T18:43:00Z",
+      "quoted_wait": 10,
+      "priority": 1
+    },
+    {
+      "id": "P2",
+      "size": 2,
+      "type": "walk_in",
+      "arrival_time": "2024-03-15T18:40:00Z",
+      "quoted_wait": 15,
+      "priority": 2
+    }
+  ],
+  "upcoming_reservations": [
+    {
+      "id": "R1",
+      "party_size": 2,
+      "time": "2024-03-15T19:30:00Z",
+      "duration": 75,
+      "status": "booked"
+    },
+    {
+      "id": "R2",
+      "party_size": 4,
+      "time": "2024-03-15T20:00:00Z",
+      "duration": 90,
+      "status": "confirmed"
+    },
+    {
+      "id": "R3",
+      "party_size": 6,
+      "time": "2024-03-15T20:15:00Z",
+      "duration": 120,
+      "status": "confirmed"
+    }
+  ]
+}
