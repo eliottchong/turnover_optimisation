@@ -69,7 +69,7 @@ def main():
                     print(f"    {i}. Table {rec.table_id} (score: {rec.total_score:.2f})")
 
     # Step 3: Run simulator
-    print("\n\n🔬 Step 3: Simulating service with different policies...")
+    print("\n\n Step 3: Simulating service with different policies...")
     print("-" * 70)
 
     # Get tables from config
@@ -81,7 +81,7 @@ def main():
     results = compare_policies(tables, priors, config, service_start, num_runs=5)
 
     print("\n" + "=" * 70)
-    print(" Demo Complete!")
+    print("Demo Complete!")
     print("=" * 70)
     print("\nNext steps:")
     print("  • Try with your own data: tableopt fit --csv your_data.csv")
